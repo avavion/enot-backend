@@ -1,0 +1,13 @@
+{
+  "name": "avavion/enot",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Alan Bogov <avavionmvm@gmail.com>"
+    }
+  ]
+}
