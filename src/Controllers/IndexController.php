@@ -9,8 +9,13 @@ class IndexController extends Controller
         return $this->render('index');
     }
 
-    public function login()
+    public function signin()
     {
-        return $this->render('login');
+        return $this->render('signin');
+    }
+
+    public function signup()
+    {
+        return $this->render('signup');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Services\Application;
+use App\Services\Session;
 
 class Controller
 {

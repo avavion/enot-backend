@@ -7,5 +7,9 @@ use App\Services\Application;
 $router = Application::$app->router;
 
 $router->get('/', [IndexController::class, 'index']);
-$router->get('/login', [IndexController::class, 'login']);
-$router->post('/auth/login', [AuthController::class, 'signin']);
+
+$router->get('/signin', [IndexController::class, 'signin']);
+$router->get('/signup', [IndexController::class, 'signup']);
+
+$router->post('/auth/signin', [AuthController::class, 'signin']);
+$router->post('/auth/signup', [AuthController::class, 'signup']);

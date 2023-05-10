@@ -2,19 +2,22 @@
 
 namespace App\Services;
 
-class View
+use App\Interfaces\ViewInterface;
+
+class View implements ViewInterface
 {
+    static public function include(string $component): void
+    {
+        $view = str_replace('.', DIRECTORY_SEPARATOR, $component);
+
+        require_once Application::$view_dir . "{$view}.view.php";
+    }
+
     public function renderView($view, array $data = []): string
     {
         $viewContent = $this->viewContent($view, $data);
-        $layoutName = $this->getLayoutNameFromViewContent($viewContent);
 
-        if (!$layoutName) {
-            return $viewContent;
-        }
-
-        $layoutContent = $this->layoutContent($layoutName);
-        return str_replace("{{ content }}", $viewContent, $layoutContent);
+        return $viewContent;
     }
 
     protected function viewContent(string $view, array $data): string
@@ -24,28 +27,7 @@ class View
         }
 
         ob_start();
-        include_once Application::$root_dir . "/Views/{$view}.view.php";
-        return ob_get_clean();
-    }
-
-    protected function getLayoutNameFromViewContent(string &$content): string|null
-    {
-        $regex = "/^@layout\('(?P<layout>.+)'\)/";
-        preg_match($regex, $content, $matches);
-
-        if (!array_key_exists("layout", $matches)) {
-            return null;
-        }
-
-        $content = preg_replace($regex, "", $content); // TODO: Normal replacement for @pattern
-
-        return $matches["layout"];
-    }
-
-    protected function layoutContent(string $layout): string
-    {
-        ob_start();
-        include_once Application::$root_dir . "/Views/layouts/{$layout}.view.php";
+        self::include($view);
         return ob_get_clean();
     }
 }

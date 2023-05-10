@@ -6,5 +6,5 @@ use App\Services\Model;
 
 class User extends Model
 {
-
+    
 }

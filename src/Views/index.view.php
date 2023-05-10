@@ -1,3 +1,20 @@
-@layout('main')
+<?php
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, quibusdam?</p>
+use App\Services\View;
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<?php View::include('components.head'); ?>
+
+<body>
+    <?php View::include('components.header'); ?>
+    <main>
+        <div class="container">
+            <?php View::include('components.alerts.errors'); ?>
+        </div>
+    </main>
+</body>
+
+</html>
