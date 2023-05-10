@@ -87,57 +87,25 @@ class Validator
         return $this->errors;
     }
 
-    private function separateKeyFromValue()
-    {
-    }
-
-    // private function prepare(array $rules)
-    // {
-    //     return array_map(function ($value) {
-    //         if (is_string($value)) {
-    //             $ruleList = explode('|', $value);
-
-    //             $values = [];
-
-    //             foreach ($ruleList as $rule) {
-    //                 if (str_contains($rule, ':')) {
-    //                     $exploded = explode(':', $rule);
-
-    //                     $values[$exploded[0]] = $exploded[1];
-
-    //                     continue;
-    //                 }
-
-    //                 $values[] = $rule;
-    //             }
-
-    //             return $values;
-    //         }
-
-    //         return $value;
-    //     }, $rules);
-    // }
-
     public function validate(array $list)
     {
-        // $list = $this->prepare($list);
-
         foreach ($list as $property => $rules) {
-            $validateValue = $this->$list[$property];
+            $validateValue = $this->data[$property];
 
             foreach ($rules as $rule) {
                 $name = $rule;
                 $params = [];
 
+
                 if (is_array($rule)) {
                     [$name, $params] = $rule;
                 }
 
-                $callback = self::$CALLBACK_RULES[$name];
+                // $callback = self::$CALLBACK_RULES[$name];
 
-                if (!$this->$callback($validateValue, $params)) {
-                    $this->appendErrorMessage($property, $name, $params);
-                }
+                // if (!$this->$callback($validateValue, $params)) {
+                //     $this->appendErrorMessage($property, $name, $params);
+                // }
             }
         }
     }

@@ -21,7 +21,7 @@ class AuthController extends Controller
                 Validator::RULE_REQUIRED
             ]
         ]);
-        
+
         $validated = $validator->validated();
 
         if (!$validated) {
