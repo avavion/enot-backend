@@ -52,7 +52,7 @@ class Builder
 
         $statement = Application::$app->database->getPDO()->prepare($query);
 
-        $result = $statement->execute([
+        $statement->execute([
             'id' => $data['id']
         ]);
 
