@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
-class Model
+abstract class Model
 {
     public array $attributes = [];
 
     public array $fillable = [];
+
+    abstract  public function getTable(): string;
 
     static public function query(): Builder
     {

@@ -2,11 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
+
 class IndexController extends Controller
 {
     public function index(): string
     {
-        return $this->render('index');
+        $user = new User();
+
+        $users = $user->getUsers();
+
+        return $this->render('index', compact('users'));
     }
 
     public function signin()

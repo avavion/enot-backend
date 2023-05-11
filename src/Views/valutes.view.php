@@ -12,12 +12,12 @@ use App\Services\View;
     <?php View::include('components.header'); ?>
     <main>
         <div class="container">
-            <h1>Users</h1>
+            <h1>valutes</h1>
 
             <ul>
-                <?php foreach ($users as $user) : ?>
+                <?php foreach ($valutes as $valute) : ?>
                     <li>
-                        <?= $user['username']; ?>
+                        <?php var_dump($valute) ?>
                     </li>
                 <?php endforeach; ?>
             </ul>

@@ -10,7 +10,7 @@ class View implements ViewInterface
     {
         $view = str_replace('.', DIRECTORY_SEPARATOR, $component);
 
-        require_once Application::$view_dir . "{$view}.view.php";
+        include Application::$view_dir . "{$view}.view.php";
     }
 
     public function renderView($view, array $data = []): string
@@ -22,12 +22,14 @@ class View implements ViewInterface
 
     protected function viewContent(string $view, array $data): string
     {
+        $view = str_replace('.', DIRECTORY_SEPARATOR, $view);
+
         foreach ($data as $key => $value) {
             $$key = $value;
         }
 
         ob_start();
-        self::include($view);
+        include Application::$view_dir . "{$view}.view.php";
         return ob_get_clean();
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Controllers\AuthController;
 use App\Controllers\IndexController;
+use App\Controllers\ValuteController;
 use App\Services\Application;
 
 $router = Application::$app->router;
@@ -13,3 +14,5 @@ $router->get('/signup', [IndexController::class, 'signup']);
 
 $router->post('/auth/signin', [AuthController::class, 'signin']);
 $router->post('/auth/signup', [AuthController::class, 'signup']);
+
+$router->get('/valutes/parse', [ValuteController::class, 'update']);

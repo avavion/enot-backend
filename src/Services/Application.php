@@ -20,7 +20,7 @@ final class Application
 
         $this->router = new Router();
         $this->response = new Response();
-        $this->database = new Database();
+        $this->database = new Database($config['database']);
         $this->session = new Session();
 
         self::$app = $this;

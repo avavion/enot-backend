@@ -4,21 +4,20 @@ namespace App\Models;
 
 use App\Services\Model;
 
-class User extends Model
+class Valute extends Model
 {
     public array $fillable = [
-        "username",
-        "email",
-        "password",
-        "role"
+        "name",
+        "char_code",
+        "value"
     ];
 
     public function getTable(): string
     {
-        return "users";
+        return "valutes";
     }
 
-    public function getUsers()
+    public function getValutes()
     {
         return $this->newQuery()->get();
     }
