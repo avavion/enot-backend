@@ -35,4 +35,20 @@ class Session implements SessionInterface
     {
         session_start();
     }
+
+    public function setOld(array $data)
+    {
+        $this->delete('old');
+
+        $this->set('old', $data);
+    }
+
+    public function old(string $key)
+    {
+        if ($this->exists('old')) {
+            return $this->get('old')[$key] ?? '';
+        }
+
+        return '';
+    }
 }

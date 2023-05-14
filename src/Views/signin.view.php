@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Application;
 use App\Services\View;
 
 ?>
@@ -16,7 +17,7 @@ use App\Services\View;
             <form action="/auth/signin" method="POST">
                 <label>
                     <span>Email</span>
-                    <input placeholder="Email" type="email" name="email" />
+                    <input value="<?= Application::$app->session->old('email'); ?>" placeholder="Email" type="email" name="email" />
                 </label>
 
                 <label>

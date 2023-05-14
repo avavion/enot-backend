@@ -13,7 +13,11 @@ class AuthController extends Controller
 {
     public function signin(Request $request)
     {
-        $validator = new Validator($request->getInputData(), [
+        $data = $request->getInputData();
+
+        Application::$app->session->setOld($data);
+
+        $validator = new Validator($data, [
             'email' => [
                 Validator::RULE_EMAIL,
                 Validator::RULE_REQUIRED,
@@ -45,6 +49,8 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         $data = $request->getInputData();
+
+        Application::$app->session->setOld($data);
 
         $validator = new Validator($data, [
             'email' => [
