@@ -6,30 +6,30 @@ use App\Models\User;
 use App\Services\Application;
 use App\Services\Auth;
 use App\Services\Request;
+use App\Services\Session;
 use App\Services\Validator;
 
 class AuthController extends Controller
 {
     public function signin(Request $request)
     {
-        // $validator = new Validator($request->getInputData(), [
-        //     'email' => [
-        //         Validator::RULE_EMAIL,
-        //         Validator::RULE_REQUIRED,
-        //     ],
-        //     'password' => [
-        //         Validator::RULE_MIN => 6,
-        //         Validator::RULE_REQUIRED
-        //     ]
-        // ]);
+        $validator = new Validator($request->getInputData(), [
+            'email' => [
+                Validator::RULE_EMAIL,
+                Validator::RULE_REQUIRED,
+            ],
+            'password' => [
+                Validator::RULE_REQUIRED
+            ]
+        ]);
 
-        // $validated = $validator->validated();
+        $validated = $validator->validated();
 
-        // if (!$validated) {
-        // Session::set('errors', $validator->getErrorMessages());
+        if (!$validated) {
+            Application::$app->session->set('errors', $validator->getErrorMessages());
 
-        // return Application::$app->response->redirect('/signin');
-        // }
+            return Application::$app->response->redirect('/signin');
+        }
 
         if (!Auth::attempt($request->getInputData())) {
             Application::$app->session->set('errors', [
@@ -46,15 +46,31 @@ class AuthController extends Controller
     {
         $data = $request->getInputData();
 
-        // $validator = new Validator($data, []);
+        $validator = new Validator($data, [
+            'email' => [
+                Validator::RULE_EMAIL,
+                Validator::RULE_REQUIRED,
+            ],
+            'password' => [
+                Validator::RULE_REQUIRED,
+            ],
+            'username' => [
+                Validator::RULE_REQUIRED,
+            ]
+        ]);
 
-        // $validated = $validator->validated();
+        $validated = $validator->validated();
 
-        // if (!$validated) {
-        // }
+        if (!$validated) {
+            Application::$app->session->set('errors', $validator->getErrorMessages());
+
+            return Application::$app->response->redirect('/signup');
+        }
 
         if (!is_null(User::query()->where('email', '=', $data['email'])->first())) {
-            return Application::$app->response->redirect('/');
+            Application::$app->session->set('errors', ['message' => 'User has been created!']);
+
+            return Application::$app->response->redirect('/signup');
         }
 
         User::query()->create([

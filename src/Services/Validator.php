@@ -44,24 +44,29 @@ class Validator
         return isset($value) && strlen(trim($value));
     }
 
-    private function validateEmail()
+    private function validateEmail(string $value): bool
     {
-        return false;
+        $emailRegex = "/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/";
+        return !!preg_match($emailRegex, $value);
     }
 
-    private function validateMax()
+    private function validateMax(string $value, array $params): bool
     {
-        return false;
+        $maxNumber = $params["max"];
+        return strlen($value) <= $maxNumber;
     }
 
-    private function validateMin()
+    private function validateMin(string $value, array $params): bool
     {
-        return false;
+        $minNumber = $params["min"];
+        return strlen($value) >= $minNumber;
     }
 
-    private function validateSame()
+    private function validateSame(string $value, array $params): bool
     {
-        return false;
+        $field = $params["same"];
+        $fieldValue = $this->data[$field];
+        return $value === $fieldValue;
     }
 
     private function appendErrorMessage(string $property, string $rule, array $params = []): void
@@ -101,11 +106,11 @@ class Validator
                     [$name, $params] = $rule;
                 }
 
-                // $callback = self::$CALLBACK_RULES[$name];
+                $callback = self::$CALLBACK_RULES[$name];
 
-                // if (!$this->$callback($validateValue, $params)) {
-                //     $this->appendErrorMessage($property, $name, $params);
-                // }
+                if (!$this->$callback($validateValue, $params)) {
+                    $this->appendErrorMessage($property, $name, $params);
+                }
             }
         }
     }

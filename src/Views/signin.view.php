@@ -12,6 +12,7 @@ use App\Services\View;
     <?php View::include('components.header'); ?>
     <main>
         <div class="container">
+            <?php View::include('components.alerts.errors'); ?>
             <form action="/auth/signin" method="POST">
                 <label>
                     <span>Email</span>

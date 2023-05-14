@@ -12,6 +12,9 @@ use App\Services\View;
     <?php View::include('components.header'); ?>
     <main>
         <div class="container">
+
+            <?php View::include('components.alerts.errors'); ?>
+
             <form action="/auth/signup" method="POST">
                 <label>
                     <span>Username</span>
