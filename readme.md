@@ -14,6 +14,9 @@
 
 Тоже самое и для Linux в crontab.
 
+Либо, добавить CURL команду на открытие ссылки:
+http://enot/valutes/parse?email=parser@enot.ru&password=parserparser
+
 Для парсер-бота отдельная учетная запись:
 Email: parser@enot.ru
 Password: parserparser
