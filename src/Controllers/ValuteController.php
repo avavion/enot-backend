@@ -139,7 +139,7 @@ class ValuteController extends Controller
             }
         }
 
-        Auth::logout();
+        // Auth::logout();
 
         Application::$app->response->setStatusCode(200);
 
