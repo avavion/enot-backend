@@ -24,7 +24,7 @@ class Auth
 
     static public function attempt(array $credentials)
     {
-        $user = User::query()->where('username', '=', $credentials['username'])->first();
+        $user = User::query()->where('email', '=', $credentials['email'])->first();
 
         if (is_null($user)) {
             return false;

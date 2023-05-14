@@ -1,3 +1,1 @@
-ROOT=$(pwd)
-
-curl -I "http://enot/valutes/parse?username=parser&password=parserparser" >> "$ROOT/parse.txt"
+curl -I "http://enot/valutes/parse?email=parser@enot.ru&password=parserparser" >> "E:\OSPanel\domains\enot\logger.txt"

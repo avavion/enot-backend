@@ -21,4 +21,11 @@ class Valute extends Model
     {
         return $this->newQuery()->get();
     }
+
+    public function getByChar(string $char)
+    {
+        $char = strtoupper($char);
+
+        return $this->newQuery()->where('char_code', '=', $char)->first();
+    }
 }

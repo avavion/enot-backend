@@ -1,8 +1,10 @@
 <?php
 
 use App\Services\Auth;
+use App\Services\View;
 
 ?>
+<?php View::include('components.notifications'); ?>
 <header class="header" id="header">
     <div class="container">
         <div class="wrapper">

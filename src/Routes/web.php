@@ -17,3 +17,4 @@ $router->post('/auth/signin', [AuthController::class, 'signin']);
 $router->post('/auth/signup', [AuthController::class, 'signup']);
 
 $router->get('/valutes/parse', [ValuteController::class, 'update']);
+$router->post('/valutes/convert', [ValuteController::class, 'convert']);
