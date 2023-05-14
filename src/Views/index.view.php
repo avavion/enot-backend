@@ -1,6 +1,12 @@
 <?php
 
+use App\Services\Application;
+use App\Services\Auth;
 use App\Services\View;
+
+if (is_null(Auth::user())) {
+    return Application::$app->response->redirect('/signin');
+}
 
 ?>
 
@@ -21,6 +27,8 @@ use App\Services\View;
                     </li>
                 <?php endforeach; ?>
             </ul>
+
+            <?php var_dump(Auth::user()); ?>
         </div>
     </main>
 </body>

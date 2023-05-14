@@ -11,6 +11,7 @@ $router->get('/', [IndexController::class, 'index']);
 
 $router->get('/signin', [IndexController::class, 'signin']);
 $router->get('/signup', [IndexController::class, 'signup']);
+$router->get('/auth/logout', [AuthController::class, 'logout']);
 
 $router->post('/auth/signin', [AuthController::class, 'signin']);
 $router->post('/auth/signup', [AuthController::class, 'signup']);

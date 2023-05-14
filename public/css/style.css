@@ -17,3 +17,43 @@
   padding: 0 var(--container-offset);
   max-width: var(--container);
 }
+
+.header .wrapper ul {
+  list-style: none;
+
+  gap: 32px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.header .wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 24px 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+form input {
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+form button {
+  padding: 16px;
+  font-size: 16px;
+}

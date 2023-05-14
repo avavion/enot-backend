@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Valute;
 use App\Services\Application;
+use App\Services\Auth;
 use App\Services\Parser;
 use App\Services\Request;
 
@@ -39,9 +40,19 @@ class ValuteController extends Controller
     {
         $this->valute = new Valute();
 
-        // $query = $request->getQueryData();
+        $data = $request->getQueryData();
 
-        // ['username' => $username, "password" => $password] = $query;
+        if (empty($data)) {
+            Application::$app->response->setStatusCode(500);
+
+            return Application::$app->response->redirect('/');
+        }
+
+        if (!Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
+            Application::$app->response->setStatusCode(500);
+
+            return Application::$app->response->redirect('/');
+        }
 
         $valutes = $this->fetchValutes();
 
@@ -54,5 +65,9 @@ class ValuteController extends Controller
                 $this->valute->newQuery()->update([...$this->getValuteFields($valute), 'id' => $findValute['id']]);
             }
         }
+
+        Application::$app->response->setStatusCode(200);
+
+        return Application::$app->response->redirect('/');
     }
 }

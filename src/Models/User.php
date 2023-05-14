@@ -9,8 +9,7 @@ class User extends Model
     public array $fillable = [
         "username",
         "email",
-        "password",
-        "role"
+        "password"
     ];
 
     public function getTable(): string

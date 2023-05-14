@@ -26,6 +26,11 @@ class Session implements SessionInterface
         return array_key_exists($key, $_SESSION);
     }
 
+    static public function delete(string $key): void
+    {
+        unset($_SESSION[$key]);
+    }
+
     public function run(): void
     {
         session_start();

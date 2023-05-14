@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use App\Services\Application;
+use App\Services\Auth;
 use App\Services\Request;
-use App\Services\Session;
 use App\Services\Validator;
 
 class AuthController extends Controller
@@ -33,7 +34,37 @@ class AuthController extends Controller
         // return Application::$app->response->redirect('/');
     }
 
-    public function signup()
+    public function signup(Request $request)
     {
+        $data = $request->getInputData();
+
+        // $validator = new Validator($data, []);
+
+        // $validated = $validator->validated();
+
+        // if (!$validated) {
+        // }
+
+        if (!is_null(User::query()->where('email', '=', $data['email'])->first())) {
+            return Application::$app->response->redirect('/');
+        }
+
+        $user = User::query()->create([
+            ...$data,
+            'password' => password_hash($data['password'], PASSWORD_BCRYPT)
+        ]);
+
+        $user = User::query()->where('email', '=', $data['email'])->first();
+
+        Auth::login($user);
+
+        return Application::$app->response->redirect('/');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return Application::$app->response->redirect('/');
     }
 }
